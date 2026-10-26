@@ -4,7 +4,7 @@
 import logging
 from contextlib import contextmanager
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from ...components.backend_adapter import WooAPI, WooLocation
@@ -140,13 +140,13 @@ class WooBackend(models.Model):
         )
         r = wcapi.get("products")
         if r.status_code == 404:
-            raise UserError(_("Enter Valid url"))
+            raise UserError(self.env._("Enter Valid url"))
         val = r.json()
         if "errors" in r.json():
             msg = val["errors"][0]["message"] + "\n" + val["errors"][0]["code"]
-            raise UserError(_(msg))
+            raise UserError(self.env._(msg))
         else:
-            raise UserError(_("Test Success"))
+            raise UserError(self.env._("Test Success"))
 
     def import_categories(self):
         for backend in self:

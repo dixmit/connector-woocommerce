@@ -22,13 +22,10 @@ class WooBinding(models.AbstractModel):
     # fields.Char because 0 is a valid WooCommerce ID
     external_id = fields.Char(string="ID on Woo")
 
-    _sql_constraints = [
-        (
-            "woo_uniq",
-            "unique(backend_id, external_id)",
-            "A binding already exists with the same Woo ID.",
-        ),
-    ]
+    _woo_uniq = models.Constraint(
+        "unique(backend_id, external_id)",
+        "A binding already exists with the same Woo ID.",
+    )
 
     def check_active(self, backend):
         if not backend.active:

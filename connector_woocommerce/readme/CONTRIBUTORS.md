@@ -9,3 +9,6 @@
 - [Grupo Isonor](https://www.grupoisonor.es):
 
   > - David Palanca
+
+- [Dixmit](https://www.dixmit.com):
+  - Enric Tobella
