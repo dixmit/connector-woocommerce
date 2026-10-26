@@ -5,7 +5,7 @@
 import logging
 from datetime import datetime
 
-from odoo import _, fields
+from odoo import fields
 
 from odoo.addons.component.core import AbstractComponent
 from odoo.addons.connector.exception import IDMissingInBackend
@@ -187,7 +187,7 @@ class WooImporter(AbstractComponent):
         try:
             self.woo_record = self._get_woo_data()
         except IDMissingInBackend:
-            return _("Record does no longer exist in WooCommerce")
+            return self.env._("Record does no longer exist in WooCommerce")
 
         skip = self._must_skip()
         if skip:
@@ -195,7 +195,7 @@ class WooImporter(AbstractComponent):
 
         binding = self._get_binding()
         if not force and self._is_uptodate(binding):
-            return _("Already up-to-date.")
+            return self.env._("Already up-to-date.")
 
         # Keep a lock on this import until the transaction is committed
         # The lock is kept since we have detected that the informations
